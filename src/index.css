@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+
+  --color-void: #030712;
+  --color-abyss: #050b1d;
+  --color-panel: #0b1226;
+  --color-electric: #38bdf8;
+  --color-violet-neon: #8b5cf6;
+  --color-blue-neon: #3b82f6;
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-pulse-glow: pulseGlow 4.5s ease-in-out infinite;
+  --animate-gradient: gradientShift 8s ease infinite;
+  --animate-dash: dashMove 6s linear infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #030712;
+  color: #e5e9f2;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(56, 189, 248, 0.35);
+  color: #fff;
+}
+
+/* Subtle tech grid */
+.bg-tech-grid {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 35%, transparent 78%);
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.text-gradient {
+  background: linear-gradient(100deg, #fff 10%, #bae6fd 38%, #38bdf8 55%, #a78bfa 78%, #e0e7ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-glow {
+  box-shadow: 0 0 0 1px rgba(56,189,248,.35), 0 8px 32px -6px rgba(56,189,248,.55), 0 2px 12px rgba(139,92,246,.35);
+}
+.btn-glow:hover {
+  box-shadow: 0 0 0 1px rgba(56,189,248,.6), 0 12px 44px -6px rgba(56,189,248,.75), 0 4px 20px rgba(139,92,246,.5);
+}
+
+.card-glow {
+  transition: transform 300ms cubic-bezier(.22,1,.36,1), box-shadow 300ms ease, border-color 300ms ease, background 300ms ease;
+}
+.card-glow:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56,189,248,.45);
+  box-shadow: 0 20px 50px -18px rgba(56,189,248,.45), 0 8px 30px -12px rgba(139,92,246,.4), inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  height: 1.5px; width: 100%;
+  background: linear-gradient(90deg, #38bdf8, #8b5cf6);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 280ms ease;
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes pulseGlow {
+  0%, 100% { opacity: .55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes dashMove {
+  to { stroke-dashoffset: -240; }
+}
+@keyframes orbDrift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(24px,-18px) scale(1.05); }
+  66% { transform: translate(-18px,14px) scale(.97); }
+}
+
+/* Focus visibility for a11y */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

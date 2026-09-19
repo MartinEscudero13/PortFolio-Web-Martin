@@ -25,8 +25,8 @@ export default function Preloader() {
   return (
     <motion.div
       className="fixed inset-0 z-[100] grid place-items-center bg-[#030712] px-5"
-      exit={{ opacity: 0, scale: 1.04, filter: "blur(6px)" }}
-      transition={{ duration: 0.35, ease: "easeOut" }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
       role="status"
       aria-label="Cargando sitio"
     >

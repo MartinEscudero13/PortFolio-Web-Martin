@@ -1,26 +1,30 @@
-import { Code2, Gauge, Users, Sparkles } from "lucide-react";
+import { MessagesSquare, Code2, ShieldCheck, Rocket } from "lucide-react";
 import Reveal from "./Reveal";
 
-const HIGHLIGHTS = [
+const STEPS = [
+  {
+    icon: MessagesSquare,
+    num: "01",
+    title: "Escucho tu idea",
+    desc: "Relevamos juntos objetivo, alcance y prioridades antes de escribir código.",
+  },
   {
     icon: Code2,
-    title: "Full Stack real",
-    desc: "JavaScript, Python, PHP y MySQL: del frontend al backend sin fricción.",
+    num: "02",
+    title: "Diseño y desarrollo",
+    desc: "Interfaces modernas y backend sólido, con avances visibles en cada etapa.",
   },
   {
-    icon: Gauge,
-    title: "Rendimiento primero",
-    desc: "Experiencias rápidas y optimizadas, cuidando cada milisegundo.",
+    icon: ShieldCheck,
+    num: "03",
+    title: "Testing y calidad",
+    desc: "Pruebo cada entrega como QA: casos, regresión y detalle antes de entregar.",
   },
   {
-    icon: Users,
-    title: "Centrado en el usuario",
-    desc: "Diseño accesible y responsivo, pensado para personas reales.",
-  },
-  {
-    icon: Sparkles,
-    title: "Calidad y detalle",
-    desc: "Lógica, creatividad y buenas prácticas en cada entrega.",
+    icon: Rocket,
+    num: "04",
+    title: "Deploy y acompañamiento",
+    desc: "Publicación, revisión final y soporte post-entrega para que todo siga andando.",
   },
 ];
 
@@ -76,19 +80,31 @@ export default function About() {
           </div>
         </Reveal>
 
-        <ul className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5" role="list">
-          {HIGHLIGHTS.map((h, i) => (
-            <Reveal key={h.title} delay={i * 0.08}>
-              <li className="group h-full rounded-2xl glass card-glow p-6">
-                <span className="inline-grid place-items-center w-11 h-11 rounded-xl border border-sky-300/20 bg-sky-400/10 text-sky-300 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
-                  <h.icon className="w-5 h-5" strokeWidth={1.9} />
+        <Reveal className="mx-auto mt-14 max-w-2xl text-center">
+          <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            Cómo <span className="text-gradient">trabajo</span>
+          </h3>
+          <p className="mt-3 text-slate-400 leading-relaxed text-[15px]">
+            Un proceso claro de principio a fin, para que siempre sepas en qué punto está tu proyecto.
+          </p>
+        </Reveal>
+
+        <ol className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5" role="list">
+          {STEPS.map((s, i) => (
+            <Reveal key={s.num} delay={i * 0.08}>
+              <li className="group relative h-full rounded-2xl glass card-glow p-6 overflow-hidden">
+                <span aria-hidden="true" className="absolute -top-3 right-3 font-display text-6xl font-bold text-white/[0.06] select-none transition-colors duration-300 group-hover:text-sky-400/10">
+                  {s.num}
                 </span>
-                <h3 className="mt-4 font-display text-[17px] font-semibold text-white">{h.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-400">{h.desc}</p>
+                <span className="inline-grid place-items-center w-11 h-11 rounded-xl border border-sky-300/20 bg-sky-400/10 text-sky-300 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3">
+                  <s.icon className="w-5 h-5" strokeWidth={1.9} />
+                </span>
+                <h4 className="mt-4 font-display text-[17px] font-semibold text-white">{s.title}</h4>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">{s.desc}</p>
               </li>
             </Reveal>
           ))}
-        </ul>
+        </ol>
       </div>
     </section>
   );

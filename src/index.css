@@ -114,13 +114,6 @@ body {
   66% { transform: translate(-18px,14px) scale(.97); }
 }
 
-/* Render diferido de secciones fuera de pantalla (solo rendimiento,
-   sin ningún cambio visual) */
-main section {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 800px;
-}
-
 /* Focus visibility for a11y */
 a:focus-visible, button:focus-visible {
   outline: 2px solid #38bdf8;

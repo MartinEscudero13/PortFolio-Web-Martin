@@ -78,11 +78,13 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ${
-          open ? "max-h-[540px] opacity-100" : "max-h-0 opacity-0"
+        className={`md:hidden overflow-hidden transform-gpu bg-[#0b1226]/60 backdrop-blur-2xl shadow-[0_24px_48px_-16px_rgba(0,0,0,0.7)] transition-[max-height,opacity] duration-300 ${
+          open
+            ? "max-h-[540px] opacity-100 border-b border-white/10"
+            : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="px-5 pb-5 pt-1 space-y-1 bg-[#0b1226]/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.7)]">
+        <ul className="px-5 pb-5 pt-1 space-y-1">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a

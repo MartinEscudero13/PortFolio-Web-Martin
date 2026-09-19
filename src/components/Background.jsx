@@ -1,7 +1,8 @@
 import { memo, useMemo } from "react";
 import { useReducedMotion } from "framer-motion";
 
-/* Partículas luminosas generadas con CSS (sin canvas para máximo rendimiento) */
+/* Partículas luminosas con deriva lenta (sin canvas para máximo rendimiento).
+   Capa externa: deriva por transform (GPU). Capa interna: pulso. */
 function Particles({ count = 26 }) {
   const dots = useMemo(
     () =>
@@ -12,6 +13,10 @@ function Particles({ count = 26 }) {
         size: 1.5 + ((i * 7) % 3),
         delay: (i % 9) * 0.7,
         dur: 4 + ((i * 13) % 5),
+        driftDur: 14 + ((i * 7) % 9),
+        driftDelay: -((i * 3.1) % 12),
+        dx: ((i * 29) % 48) - 24,
+        dy: ((i * 41) % 52) - 30,
         cyan: i % 3 === 0,
       })),
     [count]
@@ -21,21 +26,30 @@ function Particles({ count = 26 }) {
       {dots.map((d) => (
         <span
           key={d.id}
-          className={`absolute rounded-full animate-pulse-glow ${
-            d.cyan ? "bg-sky-300" : "bg-violet-300"
-          }`}
+          className="absolute"
           style={{
             left: `${d.left}%`,
             top: `${d.top}%`,
-            width: d.size,
-            height: d.size,
-            boxShadow: d.cyan
-              ? "0 0 12px 2px rgba(56,189,248,.8)"
-              : "0 0 12px 2px rgba(139,92,246,.7)",
-            animationDelay: `${d.delay}s`,
-            animationDuration: `${d.dur}s`,
+            ["--dx"]: `${d.dx}px`,
+            ["--dy"]: `${d.dy}px`,
+            animation: `drift ${d.driftDur}s ease-in-out ${d.driftDelay}s infinite alternate`,
           }}
-        />
+        >
+          <span
+            className={`block rounded-full animate-pulse-glow ${
+              d.cyan ? "bg-sky-300" : "bg-violet-300"
+            }`}
+            style={{
+              width: d.size,
+              height: d.size,
+              boxShadow: d.cyan
+                ? "0 0 12px 2px rgba(56,189,248,.8)"
+                : "0 0 12px 2px rgba(139,92,246,.7)",
+              animationDelay: `${d.delay}s`,
+              animationDuration: `${d.dur}s`,
+            }}
+          />
+        </span>
       ))}
     </div>
   );

@@ -101,6 +101,12 @@ body {
   0%, 100% { opacity: .55; transform: scale(1); }
   50% { opacity: 1; transform: scale(1.06); }
 }
+/* Deriva lenta de partículas (solo transform: barato para GPU).
+   El desplazamiento real se define por partícula con variables CSS. */
+@keyframes drift {
+  from { translate: 0 0; }
+  to { translate: var(--dx, 20px) var(--dy, -24px); }
+}
 @keyframes gradientShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

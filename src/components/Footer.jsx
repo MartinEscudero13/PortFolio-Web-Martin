@@ -62,7 +62,7 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-white text-[13px] uppercase tracking-widest">Recursos</h3>
             <ul className="mt-4 space-y-2.5 text-slate-400">
-              <li><a className="hover:text-white transition-colors" href="/cv-escudero.pdf" download="CV-Martin-Escudero.pdf">Descargar CV</a></li>
+              <li><a className="hover:text-white transition-colors" href={`${import.meta.env.BASE_URL}cv-escudero.pdf`} download="CV-Martin-Escudero.pdf">Descargar CV</a></li>
             </ul>
           </div>
         </nav>

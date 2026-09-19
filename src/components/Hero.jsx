@@ -81,7 +81,7 @@ export default function Hero() {
             <div aria-hidden="true" className="absolute -inset-4 rounded-full bg-[conic-gradient(from_120deg,#38bdf8,#8b5cf6,#38bdf8)] opacity-40 blur-2xl animate-pulse-glow" />
             <div className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-sky-400 via-blue-600 to-violet-600" aria-hidden="true" />
             <img
-              src="/foto-perfil.jpg"
+              src={`${import.meta.env.BASE_URL}foto-perfil.jpg`}
               alt="Foto de Martín Escudero"
               className="relative w-full h-full object-cover object-[50%_12%] rounded-full border-4 border-[#030712]"
               loading="eager"
@@ -145,7 +145,7 @@ export default function Hero() {
             className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5"
           >
             <a
-              href="/cv-escudero.pdf"
+              href={`${import.meta.env.BASE_URL}cv-escudero.pdf`}
               download="CV-Martin-Escudero.pdf"
               className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-gradient-to-r from-sky-400 via-blue-500 to-violet-500 bg-[length:180%_180%] animate-gradient px-7 py-3.5 text-[15px] font-semibold text-white btn-glow transition-all duration-300 hover:scale-[1.03] hover:brightness-110 active:scale-[0.98]"
             >

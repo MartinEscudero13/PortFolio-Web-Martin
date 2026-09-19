@@ -13,7 +13,7 @@ import Reveal from "./Reveal";
 const PROJECTS = [
   {
     icon: ShoppingCart,
-    img: "/proyecto-instrumentos.png",
+    img: `${import.meta.env.BASE_URL}proyecto-instrumentos.png`,
     alt: "Captura del Ecommerce de Instrumentos",
     title: "Ecommerce de Instrumentos",
     desc: "Sitio web de ventas desarrollado con JavaScript, PHP y MySQL. Permite agregar productos al carrito, realizar compras y gestionar usuarios.",
@@ -23,7 +23,7 @@ const PROJECTS = [
   },
   {
     icon: Building2,
-    img: "/proyecto-geriatrico.png",
+    img: `${import.meta.env.BASE_URL}proyecto-geriatrico.png`,
     alt: "Captura de la página web del Geriátrico",
     title: "Página Web Geriátrico",
     desc: "Sitio institucional para una residencia de adultos mayores. Incluye diseño responsive, efectos con JavaScript y formularios de contacto funcionales.",

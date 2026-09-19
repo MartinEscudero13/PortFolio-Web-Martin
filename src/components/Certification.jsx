@@ -55,7 +55,7 @@ export default function Certification() {
             <Reveal>
               <figure className="group relative rounded-3xl glass overflow-hidden card-glow">
                 <img
-                  src="/certificado-qa.jpg"
+                  src={`${import.meta.env.BASE_URL}certificado-qa.jpg`}
                   alt="Certificado del curso Testing de Software y QA de QARMY a nombre de Martín Escudero"
                   loading="lazy"
                   className="w-full h-auto object-cover"

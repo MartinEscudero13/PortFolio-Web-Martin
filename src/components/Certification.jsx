@@ -51,7 +51,7 @@ export default function Certification() {
 
         <div className="mt-12 grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
           {/* Certificado */}
-          <motion.div style={{ y: yFloat }} className="relative">
+          <motion.div style={{ y: yFloat }} className="relative will-change-transform">
             <Reveal>
               <figure className="group relative rounded-3xl glass overflow-hidden card-glow">
                 <img

@@ -42,7 +42,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#030712] text-slate-100 antialiased">
+    <div className="relative min-h-dvh bg-[#030712] text-slate-100 antialiased">
       <AnimatePresence>{loading && <Preloader key="preloader" />}</AnimatePresence>
       <a
         href="#contenido"

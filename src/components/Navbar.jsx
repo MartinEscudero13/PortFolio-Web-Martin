@@ -82,7 +82,7 @@ export default function Navbar() {
           open ? "max-h-[540px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <ul className="px-5 pb-5 pt-1 space-y-1 bg-[#030712]/95 backdrop-blur-xl border-b border-white/10">
+        <ul className="px-5 pb-5 pt-1 space-y-1 bg-[#0b1226]/60 backdrop-blur-2xl border-b border-white/10 shadow-[0_24px_48px_-16px_rgba(0,0,0,0.7)]">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a

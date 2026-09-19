@@ -28,7 +28,7 @@ export default function TechSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
         {/* Panel de skills */}
         <div className="relative order-2 lg:order-1">
-          <motion.div style={{ y: yFloat }} className="relative rounded-3xl glass p-6 sm:p-8 overflow-hidden">
+          <motion.div style={{ y: yFloat }} className="relative rounded-3xl glass p-6 sm:p-8 overflow-hidden will-change-transform">
             <div className="absolute inset-0 bg-tech-grid opacity-60" aria-hidden="true" />
             <div className="absolute -top-24 left-1/3 w-72 h-72 rounded-full bg-sky-500/15 blur-3xl" aria-hidden="true" />
             <div className="relative">

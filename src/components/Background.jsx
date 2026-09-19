@@ -46,7 +46,7 @@ const MemoParticles = memo(Particles);
 export default function Background() {
   const reduce = useReducedMotion();
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0">
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 transform-gpu">
       {/* Base */}
       <div className="absolute inset-0 bg-[#030712]" />
       {/* Grid tecnológico sutil */}

@@ -48,12 +48,15 @@ export default function About() {
                 <strong className="text-sky-300 font-semibold">usuario</strong>.
               </p>
               <p>
-                Trabajo con tecnologías como <strong className="text-sky-300 font-semibold">JavaScript</strong>,{" "}
-                <strong className="text-sky-300 font-semibold">Python</strong>,{" "}
-                <strong className="text-sky-300 font-semibold">PHP</strong> y{" "}
-                <strong className="text-sky-300 font-semibold">MySQL</strong>, lo que me permite desarrollar
-                tanto el <strong className="text-white font-semibold">frontend</strong> como el{" "}
-                <strong className="text-white font-semibold">backend</strong>.
+                Trabajo con un <strong className="text-white font-semibold">stack moderno</strong> que
+                cubre el ciclo completo: <strong className="text-white font-semibold">interfaces dinámicas</strong>,{" "}
+                <strong className="text-white font-semibold">lógica de negocio sólida</strong> y{" "}
+                <strong className="text-sky-300 font-semibold">bases de datos relacionales</strong> bien
+                modeladas, lo que me permite desarrollar tanto el{" "}
+                <strong className="text-white font-semibold">frontend</strong> como el{" "}
+                <strong className="text-white font-semibold">backend</strong> — cuidando la{" "}
+                <strong className="text-sky-300 font-semibold">calidad del software</strong> y aprovechando
+                la <strong className="text-sky-300 font-semibold">IA</strong> para desarrollar más rápido y mejor.
               </p>
               <p>
                 Me enfoco en crear experiencias <strong className="text-white font-semibold">limpias</strong>,{" "}

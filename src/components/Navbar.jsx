@@ -30,6 +30,11 @@ export default function Navbar() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
+      {/* Línea fluida del tema en el borde inferior */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-sky-400 via-blue-500 to-violet-500 bg-[length:200%_100%] animate-gradient shadow-[0_0_12px_rgba(56,189,248,0.55)]"
+      />
       <nav
         aria-label="Navegación principal"
         className="mx-auto flex h-16 md:h-[72px] max-w-7xl items-center justify-between px-5 sm:px-8"

@@ -58,6 +58,7 @@ export default function Projects() {
                     src={p.img}
                     alt={p.alt}
                     loading="lazy"
+                    decoding="async"
                     className="w-full h-56 sm:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent" />

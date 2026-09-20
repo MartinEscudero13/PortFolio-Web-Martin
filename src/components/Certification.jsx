@@ -58,6 +58,7 @@ export default function Certification() {
                   src={`${import.meta.env.BASE_URL}certificado-qa.jpg`}
                   alt="Certificado del curso Testing de Software y QA de QARMY a nombre de Martín Escudero"
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-auto object-cover"
                 />
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#030712]/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

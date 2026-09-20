@@ -85,6 +85,8 @@ export default function Hero() {
               alt="Foto de Martín Escudero"
               className="relative w-full h-full object-cover object-[50%_12%] rounded-full border-4 border-[#030712]"
               loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
             <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-300/30 bg-[#030712]/90 backdrop-blur px-3 py-1.5 text-xs font-medium text-emerald-200">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />

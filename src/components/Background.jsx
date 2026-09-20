@@ -3,7 +3,7 @@ import { useReducedMotion } from "framer-motion";
 
 /* En móvil se renderizan menos partículas (12 vs 26): misma densidad
    visual en pantalla chica, menos de la mitad de capas con glow animado. */
-function useParticleCount(desktop = 26, mobile = 8) {
+function useParticleCount(desktop = 26, mobile = 16) {
   const [count, setCount] = useState(() =>
     typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
       ? mobile

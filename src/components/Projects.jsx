@@ -54,13 +54,16 @@ export default function Projects() {
             <Reveal key={p.title} delay={i * 0.1}>
               <article className="group h-full rounded-3xl glass card-glow overflow-hidden flex flex-col">
                 <div className="relative overflow-hidden">
-                  <img
-                    src={p.img}
-                    alt={p.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-56 sm:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
+                  <picture>
+                    <source srcSet={p.img.replace(/\.(png|jpe?g)$/, ".webp")} type="image/webp" />
+                    <img
+                      src={p.img}
+                      alt={p.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-56 sm:h-64 object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  </picture>
                   <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent" />
                 </div>
                 <div className="p-6 sm:p-7 flex flex-col flex-1">

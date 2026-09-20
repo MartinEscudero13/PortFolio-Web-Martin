@@ -1,20 +1,28 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
-import TechSection from "./components/TechSection";
-import Certification from "./components/Certification";
-// TODO: para activar la sección Proyectos, descomenta la siguiente línea
-// (y el link "Proyectos" en Navbar.jsx + Footer.jsx)
-// import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
 import Background from "./components/Background";
 import Preloader from "./components/Preloader";
 
+/* Code-splitting: las secciones bajo el fold viajan en chunks separados
+   y no bloquean la primera pintura (Hero). */
+const About = lazy(() => import("./components/About"));
+const TechSection = lazy(() => import("./components/TechSection"));
+const Certification = lazy(() => import("./components/Certification"));
+// TODO: para activar la sección Proyectos, descomenta la siguiente línea
+// (y el link "Proyectos" en Navbar.jsx + Footer.jsx)
+// import Projects from "./components/Projects";
+const Contact = lazy(() => import("./components/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
+
 const MIN_DISPLAY = 1600;
 const MAX_WAIT = 3200;
+
+/* Reserva de altura mientras carga el chunk: evita saltos de layout (CLS) */
+function SectionFallback() {
+  return <div aria-hidden="true" className="min-h-[50vh]" />;
+}
 
 export default function App() {
   const [loading, setLoading] = useState(true);
@@ -54,16 +62,20 @@ export default function App() {
       <Navbar />
       <main id="contenido" className="relative z-10">
         <Hero />
-        <About />
-        <TechSection />
-        <Certification />
-        {/* TODO: descomenta para publicar tus proyectos
-        <Projects />
-        */}
-        <Contact />
+        <Suspense fallback={<SectionFallback />}>
+          <About />
+          <TechSection />
+          <Certification />
+          {/* TODO: descomenta para publicar tus proyectos
+          <Projects />
+          */}
+          <Contact />
+        </Suspense>
       </main>
       <div className="relative z-10">
-        <Footer />
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
       </div>
     </div>
   );

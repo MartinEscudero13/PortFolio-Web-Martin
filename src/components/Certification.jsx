@@ -1,4 +1,5 @@
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
+import { useCanParallax } from "../hooks/useMedia";
 import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ClipboardCheck, Bug, FileWarning, RefreshCw, BadgeCheck, ExternalLink, Award } from "lucide-react";
 import Reveal from "./Reveal";
@@ -30,12 +31,7 @@ export default function Certification() {
   const ref = useRef(null);
   const reduce = useReducedMotion();
   /* Parallax solo en desktop con hover: en táctil/móvil queda estático */
-  const canParallax = useMemo(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(hover: hover) and (min-width: 1024px)").matches,
-    []
-  );
+  const canParallax = useCanParallax();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const yFloat = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : 36, reduce ? 0 : -36]);
 
@@ -61,13 +57,16 @@ export default function Certification() {
           <m.div style={{ y: canParallax ? yFloat : 0 }} className="relative will-change-auto sm:will-change-transform">
             <Reveal>
               <figure className="group relative rounded-3xl glass overflow-hidden card-glow">
-                <img
-                  src={`${import.meta.env.BASE_URL}certificado-qa.jpg`}
-                  alt="Certificado del curso Testing de Software y QA de QARMY a nombre de Martín Escudero"
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-auto object-cover"
-                />
+                <picture>
+                  <source srcSet={`${import.meta.env.BASE_URL}certificado-qa.webp`} type="image/webp" />
+                  <img
+                    src={`${import.meta.env.BASE_URL}certificado-qa.jpg`}
+                    alt="Certificado del curso Testing de Software y QA de QARMY a nombre de Martín Escudero"
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-auto object-cover"
+                  />
+                </picture>
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#030712]/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </figure>
             </Reveal>

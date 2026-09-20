@@ -80,14 +80,17 @@ export default function Hero() {
           <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80">
             <div aria-hidden="true" className="absolute -inset-4 rounded-full bg-[conic-gradient(from_120deg,#38bdf8,#8b5cf6,#38bdf8)] opacity-40 blur-lg sm:blur-2xl animate-pulse-glow" />
             <div className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-sky-400 via-blue-600 to-violet-600" aria-hidden="true" />
-            <img
-              src={`${import.meta.env.BASE_URL}foto-perfil.jpg`}
-              alt="Foto de Martín Escudero"
-              className="relative w-full h-full object-cover object-[50%_12%] rounded-full border-4 border-[#030712]"
-              loading="eager"
-              fetchpriority="high"
-              decoding="async"
-            />
+            <picture>
+              <source srcSet={`${import.meta.env.BASE_URL}foto-perfil.webp`} type="image/webp" />
+              <img
+                src={`${import.meta.env.BASE_URL}foto-perfil.jpg`}
+                alt="Foto de Martín Escudero"
+                className="relative w-full h-full object-cover object-[50%_12%] rounded-full border-4 border-[#030712]"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </picture>
             <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-300/30 bg-[#030712]/90 backdrop-blur px-3 py-1.5 text-xs font-medium text-emerald-200">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Disponible

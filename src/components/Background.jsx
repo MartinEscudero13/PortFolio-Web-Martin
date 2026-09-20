@@ -1,22 +1,6 @@
-import { memo, useEffect, useMemo, useState } from "react";
+import { memo, useMemo } from "react";
 import { useReducedMotion } from "framer-motion";
-
-/* En móvil se renderizan menos partículas (12 vs 26): misma densidad
-   visual en pantalla chica, menos de la mitad de capas con glow animado. */
-function useParticleCount(desktop = 26, mobile = 16) {
-  const [count, setCount] = useState(() =>
-    typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-      ? mobile
-      : desktop
-  );
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const onChange = (e) => setCount(e.matches ? mobile : desktop);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, [desktop, mobile]);
-  return count;
-}
+import { useParticleCount } from "../hooks/useMedia";
 
 /* Partículas luminosas con deriva lenta (sin canvas para máximo rendimiento).
    Capa externa: deriva por transform (GPU). Capa interna: pulso. */
@@ -92,8 +76,4 @@ export default function Background() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_40%,transparent_40%,rgba(3,7,18,0.7)_100%)]" />
     </div>
   );
-}
-
-export function HeroOrbit() {
-  return <MemoParticles count={14} />;
 }

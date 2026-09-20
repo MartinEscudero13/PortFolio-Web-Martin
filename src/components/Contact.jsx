@@ -13,21 +13,31 @@ const DIRECT = [
 
 export default function Contact() {
   const formRef = useRef(null);
-  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error | config
   const [showModal, setShowModal] = useState(false);
+
+  const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+  const isConfigured = Boolean(serviceId && templateId && publicKey);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (status === "sending") return;
+    // Honeypot anti-spam: los bots completan este campo oculto
+    const honeypot = formRef.current?.querySelector('[name="company"]')?.value;
+    if (honeypot) return;
+    // Sin credenciales (ej. deploy sin secrets): no intentar el envío
+    if (!isConfigured) {
+      setStatus("config");
+      return;
+    }
     setStatus("sending");
 
     try {
-      await emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        formRef.current,
-        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
-      );
+      await emailjs.sendForm(serviceId, templateId, formRef.current, {
+        publicKey,
+      });
       formRef.current.reset();
       setStatus("success");
       setShowModal(true);
@@ -75,9 +85,16 @@ export default function Contact() {
           <form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="rounded-3xl glass p-6 sm:p-9 space-y-4"
+            className="rounded-3xl glass relative p-6 sm:p-9 space-y-4"
             aria-label="Formulario de contacto"
           >
+            {/* Honeypot anti-spam: invisible para personas */}
+            <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+              <label>
+                Empresa
+                <input name="company" type="text" autoComplete="off" tabIndex={-1} />
+              </label>
+            </div>
             <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="name" className="mb-1.5 block text-sm font-medium text-slate-300">
@@ -117,7 +134,9 @@ export default function Contact() {
                 name="mensaje"
                 rows={5}
                 required
-                placeholder="Contame sobre tu proyecto…"
+                minLength={10}
+                maxLength={2000}
+                placeholder="Contame sobre tu proyecto… (mínimo 10 caracteres)"
                 className="w-full resize-none rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-[15px] text-white placeholder:text-slate-500 outline-none transition-all duration-200 focus:border-sky-400/60 focus:shadow-[0_0_0_3px_rgba(56,189,248,0.15)]"
               />
             </div>
@@ -125,6 +144,20 @@ export default function Contact() {
             {status === "error" && (
               <p role="alert" className="rounded-xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
                 Hubo un error al enviar tu mensaje. Intentá nuevamente o escribime por WhatsApp.
+              </p>
+            )}
+
+            {status === "config" && (
+              <p role="alert" className="rounded-xl border border-amber-300/30 bg-amber-400/10 px-4 py-3 text-sm text-amber-200">
+                El formulario no está disponible en este momento. Escribime por{" "}
+                <a href="https://wa.me/5492613907099" target="_blank" rel="noopener noreferrer" className="underline font-semibold">
+                  WhatsApp
+                </a>{" "}
+                o por{" "}
+                <a href="mailto:MartinDeveloperWeb@gmail.com" className="underline font-semibold">
+                  email
+                </a>
+                .
               </p>
             )}
 

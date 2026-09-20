@@ -1,4 +1,5 @@
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
+import { useCanParallax } from "../hooks/useMedia";
 import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { FileCode2, Palette, Braces, FileTerminal, Database, Server, Atom, Coffee, Table2 } from "lucide-react";
 import Reveal from "./Reveal";
@@ -20,12 +21,7 @@ export default function TechSection() {
   const reduce = useReducedMotion();
   /* Parallax solo en desktop con hover: en táctil/móvil queda estático
      (mismo diseño, sin costo de scroll-linked JS) */
-  const canParallax = useMemo(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(hover: hover) and (min-width: 1024px)").matches,
-    []
-  );
+  const canParallax = useCanParallax();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const yFloat = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : 40, reduce ? 0 : -40]);
   const yFloat2 = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : -30, reduce ? 0 : 30]);

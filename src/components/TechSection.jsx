@@ -58,11 +58,12 @@ export default function TechSection() {
                       aria-label={`Nivel de ${s.label}: ${s.value}`}
                     >
                       <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: s.bar }}
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                        className="h-full rounded-full bg-gradient-to-r from-sky-400 to-violet-500 shadow-[0_0_12px_rgba(56,189,248,0.7)]"
+                        style={{ width: s.bar, transformOrigin: "left center" }}
+                        className="h-full rounded-full bg-gradient-to-r from-sky-400 to-violet-500 shadow-[0_0_12px_rgba(56,189,248,0.7)] will-change-transform"
                       />
                     </div>
                   </li>

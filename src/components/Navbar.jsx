@@ -26,7 +26,7 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? "bg-[#030712]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.8)]"
+          ? "bg-[#030712]/80 backdrop-blur-md sm:backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.8)]"
           : "bg-transparent border-b border-transparent"
       }`}
     >
@@ -83,7 +83,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transform-gpu bg-[#0b1226]/60 backdrop-blur-2xl shadow-[0_24px_48px_-16px_rgba(0,0,0,0.7)] transition-[max-height,opacity] duration-300 ${
+        className={`md:hidden overflow-hidden transform-gpu bg-[#0b1226]/60 backdrop-blur-xl shadow-[0_24px_48px_-16px_rgba(0,0,0,0.7)] transition-[max-height,opacity] duration-300 ${
           open
             ? "max-h-[540px] opacity-100 border-b border-white/10"
             : "max-h-0 opacity-0"

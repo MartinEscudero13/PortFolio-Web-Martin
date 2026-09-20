@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import { Send, Loader2, CheckCircle2, X, MessageCircle, Mail } from "lucide-react";
 import { LinkedinIcon } from "./icons";
 import Reveal from "./Reveal";
@@ -152,7 +152,7 @@ export default function Contact() {
       {/* Modal de éxito */}
       <AnimatePresence>
         {showModal && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -163,7 +163,7 @@ export default function Contact() {
             aria-modal="true"
             aria-label="Mensaje enviado"
           >
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.92, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 8 }}
@@ -193,8 +193,8 @@ export default function Contact() {
               >
                 Cerrar
               </button>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </section>

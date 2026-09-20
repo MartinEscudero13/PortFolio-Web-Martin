@@ -43,7 +43,7 @@ export default function About() {
 
         <Reveal delay={0.1} className="mx-auto mt-10 max-w-3xl">
           <div className="relative rounded-3xl glass p-7 sm:p-10 overflow-hidden">
-            <div aria-hidden="true" className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br from-sky-400/15 to-violet-500/15 blur-3xl" />
+            <div aria-hidden="true" className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br from-sky-400/15 to-violet-500/15 blur-2xl sm:blur-3xl" />
             <div className="relative space-y-4 text-[15.5px] leading-relaxed text-slate-300">
               <p>
                 Soy <strong className="text-white font-semibold">Desarrollador Full Stack</strong> apasionado por

@@ -51,6 +51,13 @@ body {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
+/* En móvil se baja el blur del glass: misma estética, mucho menos costo GPU */
+@media (max-width: 767px) {
+  .glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
 
 .text-gradient {
   background: linear-gradient(100deg, #fff 10%, #bae6fd 38%, #38bdf8 55%, #a78bfa 78%, #e0e7ff 100%);

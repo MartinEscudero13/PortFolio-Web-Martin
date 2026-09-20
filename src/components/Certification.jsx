@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useMemo, useRef } from "react";
+import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ClipboardCheck, Bug, FileWarning, RefreshCw, BadgeCheck, ExternalLink, Award } from "lucide-react";
 import Reveal from "./Reveal";
 
@@ -29,6 +29,13 @@ const QA_TOPICS = [
 export default function Certification() {
   const ref = useRef(null);
   const reduce = useReducedMotion();
+  /* Parallax solo en desktop con hover: en táctil/móvil queda estático */
+  const canParallax = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: hover) and (min-width: 1024px)").matches,
+    []
+  );
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const yFloat = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : 36, reduce ? 0 : -36]);
 
@@ -51,7 +58,7 @@ export default function Certification() {
 
         <div className="mt-12 grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
           {/* Certificado */}
-          <motion.div style={{ y: yFloat }} className="relative will-change-transform">
+          <m.div style={{ y: canParallax ? yFloat : 0 }} className="relative will-change-auto sm:will-change-transform">
             <Reveal>
               <figure className="group relative rounded-3xl glass overflow-hidden card-glow">
                 <img
@@ -64,7 +71,7 @@ export default function Certification() {
                 <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-[#030712]/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </figure>
             </Reveal>
-            <motion.div
+            <m.div
               aria-hidden="true"
               className="absolute -top-5 -right-3 sm:-right-5 glass rounded-2xl px-4 py-3 text-sm animate-float hidden sm:flex items-center gap-2.5"
             >
@@ -73,8 +80,8 @@ export default function Certification() {
                 <p className="font-display font-bold text-white">60 hs · Online</p>
                 <p className="text-xs text-slate-400">Septiembre 2026</p>
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
           {/* Detalle */}
           <div>

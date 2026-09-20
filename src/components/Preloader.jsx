@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Terminal } from "lucide-react";
 
 const LINES = [
@@ -23,7 +23,7 @@ export default function Preloader() {
   }, [visible, reduce]);
 
   return (
-    <motion.div
+    <m.div
       className="fixed inset-0 z-[100] grid place-items-center bg-[#030712] px-5"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
@@ -78,6 +78,6 @@ export default function Preloader() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { Download, MessageCircle, Mail, MapPin } from "lucide-react";
 import { LinkedinIcon } from "./icons";
 
@@ -71,14 +71,14 @@ export default function Hero() {
     <section id="inicio" className="relative overflow-hidden pt-28 md:pt-40 pb-16 md:pb-24 scroll-mt-20">
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-[1fr_auto] gap-12 items-center">
         {/* Foto */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="order-first lg:order-last mx-auto"
         >
           <div className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80">
-            <div aria-hidden="true" className="absolute -inset-4 rounded-full bg-[conic-gradient(from_120deg,#38bdf8,#8b5cf6,#38bdf8)] opacity-40 blur-2xl animate-pulse-glow" />
+            <div aria-hidden="true" className="absolute -inset-4 rounded-full bg-[conic-gradient(from_120deg,#38bdf8,#8b5cf6,#38bdf8)] opacity-40 blur-lg sm:blur-2xl animate-pulse-glow" />
             <div className="absolute -inset-1.5 rounded-full bg-gradient-to-br from-sky-400 via-blue-600 to-violet-600" aria-hidden="true" />
             <img
               src={`${import.meta.env.BASE_URL}foto-perfil.jpg`}
@@ -93,11 +93,11 @@ export default function Hero() {
               Disponible
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Presentación */}
         <div className="text-center lg:text-left">
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55 }}
@@ -105,9 +105,9 @@ export default function Hero() {
           >
             <MapPin className="w-3.5 h-3.5" />
             Mendoza, Argentina — trabajo remoto
-          </motion.p>
+          </m.p>
 
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
@@ -116,9 +116,9 @@ export default function Hero() {
             Hola, soy
             <br />
             <span className="text-gradient">Martín Escudero</span>
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18 }}
@@ -127,10 +127,10 @@ export default function Hero() {
           >
             {typed}
             <span className="inline-block w-[2px] h-[1.1em] ml-1 -mb-[3px] bg-sky-300 animate-pulse" />
-          </motion.p>
+          </m.p>
           <span className="sr-only">Developer Full Stack</span>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.26 }}
@@ -138,9 +138,9 @@ export default function Hero() {
           >
             Desarrollador Full Stack apasionado por construir soluciones digitales
             modernas, escalables y centradas en el usuario.
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.34 }}
@@ -160,9 +160,9 @@ export default function Hero() {
             >
               Contactarme
             </a>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.44 }}
@@ -180,7 +180,7 @@ export default function Hero() {
                 <s.icon className="w-5 h-5" />
               </a>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

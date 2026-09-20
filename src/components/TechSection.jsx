@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useMemo, useRef } from "react";
+import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { FileCode2, Palette, Braces, FileTerminal, Database, Server, Atom, Coffee, Table2 } from "lucide-react";
 import Reveal from "./Reveal";
 
@@ -18,6 +18,14 @@ const SKILLS = [
 export default function TechSection() {
   const ref = useRef(null);
   const reduce = useReducedMotion();
+  /* Parallax solo en desktop con hover: en táctil/móvil queda estático
+     (mismo diseño, sin costo de scroll-linked JS) */
+  const canParallax = useMemo(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: hover) and (min-width: 1024px)").matches,
+    []
+  );
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const yFloat = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : 40, reduce ? 0 : -40]);
   const yFloat2 = useTransform(scrollYProgress, [0, 1], [reduce ? 0 : -30, reduce ? 0 : 30]);
@@ -28,9 +36,9 @@ export default function TechSection() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
         {/* Panel de skills */}
         <div className="relative order-2 lg:order-1">
-          <motion.div style={{ y: yFloat }} className="relative rounded-3xl glass p-6 sm:p-8 overflow-hidden will-change-transform">
+          <m.div style={{ y: canParallax ? yFloat : 0 }} className="relative rounded-3xl glass p-6 sm:p-8 overflow-hidden will-change-auto sm:will-change-transform">
             <div className="absolute inset-0 bg-tech-grid opacity-60" aria-hidden="true" />
-            <div className="absolute -top-24 left-1/3 w-72 h-72 rounded-full bg-sky-500/15 blur-3xl" aria-hidden="true" />
+            <div className="absolute -top-24 left-1/3 w-72 h-72 rounded-full bg-sky-500/15 blur-2xl sm:blur-3xl" aria-hidden="true" />
             <div className="relative">
               <div className="flex items-center gap-2 text-xs text-slate-400">
                 <span className="w-2.5 h-2.5 rounded-full bg-rose-400/80" />
@@ -57,29 +65,29 @@ export default function TechSection() {
                       aria-valuemax={100}
                       aria-label={`Nivel de ${s.label}: ${s.value}`}
                     >
-                      <motion.div
+                      <m.div
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                         style={{ width: s.bar, transformOrigin: "left center" }}
-                        className="h-full rounded-full bg-gradient-to-r from-sky-400 to-violet-500 shadow-[0_0_12px_rgba(56,189,248,0.7)] will-change-transform"
+                        className="h-full rounded-full bg-gradient-to-r from-sky-400 to-violet-500 shadow-[0_0_12px_rgba(56,189,248,0.7)] will-change-auto sm:will-change-transform"
                       />
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div style={{ y: yFloat2 }} aria-hidden="true" className="absolute -top-6 -right-4 sm:-right-6 glass rounded-2xl px-4 py-3 text-sm animate-float hidden sm:block">
+          <m.div style={{ y: canParallax ? yFloat2 : 0 }} aria-hidden="true" className="absolute -top-6 -right-4 sm:-right-6 glass rounded-2xl px-4 py-3 text-sm animate-float hidden sm:block">
             <p className="font-display font-bold text-white">Frontend + Backend</p>
             <p className="text-xs text-slate-400">cobertura completa</p>
-          </motion.div>
-          <motion.div style={{ y: yFloat }} aria-hidden="true" className="absolute -bottom-6 -left-3 sm:-left-6 glass rounded-2xl px-4 py-3 text-sm animate-float-slow hidden sm:block">
+          </m.div>
+          <m.div style={{ y: canParallax ? yFloat : 0 }} aria-hidden="true" className="absolute -bottom-6 -left-3 sm:-left-6 glass rounded-2xl px-4 py-3 text-sm animate-float-slow hidden sm:block">
             <p className="font-display font-bold text-white">Siempre aprendiendo</p>
             <p className="text-xs text-slate-400">nuevos desafíos</p>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Copy */}

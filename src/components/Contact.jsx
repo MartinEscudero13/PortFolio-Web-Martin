@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { AnimatePresence, m } from "framer-motion";
 import { Send, Loader2, CheckCircle2, X, MessageCircle, Mail } from "lucide-react";
@@ -15,11 +15,39 @@ export default function Contact() {
   const formRef = useRef(null);
   const [status, setStatus] = useState("idle"); // idle | sending | success | error | config
   const [showModal, setShowModal] = useState(false);
+  const modalTimer = useRef(null);
+  const closeBtnRef = useRef(null);
+  const lastFocused = useRef(null);
 
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
   const isConfigured = Boolean(serviceId && templateId && publicKey);
+
+  const closeModal = () => {
+    clearTimeout(modalTimer.current);
+    setShowModal(false);
+  };
+
+  /* Modal accesible: Escape cierra, autofocus al abrir, retorno de foco al cerrar */
+  useEffect(() => {
+    if (!showModal) return;
+    lastFocused.current = document.activeElement;
+    closeBtnRef.current?.focus();
+    const onKey = (e) => {
+      if (e.key === "Escape") closeModal();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      if (lastFocused.current instanceof HTMLElement && document.contains(lastFocused.current)) {
+        lastFocused.current.focus();
+      }
+    };
+  }, [showModal]);
+
+  /* Limpieza del auto-cierre si el componente se desmonta con el modal abierto */
+  useEffect(() => () => clearTimeout(modalTimer.current), []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,9 +69,9 @@ export default function Contact() {
       formRef.current.reset();
       setStatus("success");
       setShowModal(true);
-      setTimeout(() => setShowModal(false), 5000);
+      modalTimer.current = setTimeout(() => setShowModal(false), 5000);
     } catch (err) {
-      console.error("Error al enviar el mensaje:", err);
+      if (import.meta.env.DEV) console.error("Error al enviar el mensaje:", err);
       setStatus("error");
     }
   };
@@ -191,7 +219,7 @@ export default function Contact() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-[70] grid place-items-center bg-black/60 backdrop-blur-sm px-5"
-            onClick={() => setShowModal(false)}
+            onClick={closeModal}
             role="dialog"
             aria-modal="true"
             aria-label="Mensaje enviado"
@@ -205,7 +233,8 @@ export default function Contact() {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                onClick={() => setShowModal(false)}
+                ref={closeBtnRef}
+                onClick={closeModal}
                 aria-label="Cerrar"
                 className="absolute top-4 right-4 grid place-items-center w-8 h-8 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
               >
@@ -221,7 +250,7 @@ export default function Contact() {
                 Gracias por contactarte. Me comunicaré a la brevedad.
               </p>
               <button
-                onClick={() => setShowModal(false)}
+                onClick={closeModal}
                 className="mt-6 w-full rounded-full border border-white/15 bg-white/5 px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/10"
               >
                 Cerrar

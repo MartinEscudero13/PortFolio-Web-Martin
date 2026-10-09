@@ -16,7 +16,7 @@ const Certification = lazy(() => import("./components/Certification"));
 const Contact = lazy(() => import("./components/Contact"));
 const Footer = lazy(() => import("./components/Footer"));
 
-const MIN_DISPLAY = 1600;
+const MIN_DISPLAY = 900;
 const MAX_WAIT = 3200;
 
 /* Reserva de altura mientras carga el chunk: evita saltos de layout (CLS) */
@@ -30,12 +30,13 @@ export default function App() {
   useEffect(() => {
     const start = Date.now();
     let done = false;
+    let inner;
     const finish = () => {
       if (done) return;
       done = true;
       const elapsed = Date.now() - start;
       const remaining = Math.max(0, MIN_DISPLAY - elapsed);
-      setTimeout(() => setLoading(false), remaining);
+      inner = setTimeout(() => setLoading(false), remaining);
     };
     if (document.readyState === "complete") {
       finish();
@@ -46,6 +47,7 @@ export default function App() {
     return () => {
       window.removeEventListener("load", finish);
       clearTimeout(safety);
+      clearTimeout(inner);
     };
   }, []);
 

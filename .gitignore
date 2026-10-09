@@ -20,6 +20,11 @@ IMG_*.jpg
 IMG_*.jpeg
 IMG_*.png
 
+# Archivos temporales de bloqueo de Word/LibreOffice
+~$*
+.~lock.*
+~WRL*.tmp
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,19 +1,20 @@
 import { useRef } from "react";
 import { useCanParallax } from "../hooks/useMedia";
 import { m, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { FileCode2, Palette, Braces, FileTerminal, Database, Server, Atom, Coffee, Table2 } from "lucide-react";
+import { FileCode2, Palette, Braces, FileTerminal, Database, Server, Atom, Coffee, Table2, Wind } from "lucide-react";
 import Reveal from "./Reveal";
 
 const SKILLS = [
-  { icon: FileCode2, label: "HTML5", value: "95%", bar: "95%", color: "#e44d26" },
-  { icon: Palette, label: "CSS3", value: "90%", bar: "90%", color: "#4d7cff" },
-  { icon: Braces, label: "JavaScript", value: "85%", bar: "85%", color: "#f0db4f" },
-  { icon: FileTerminal, label: "Python", value: "50%", bar: "50%", color: "#a678ff" },
-  { icon: Server, label: "PHP", value: "70%", bar: "70%", color: "#8892be" },
-  { icon: Database, label: "MySQL", value: "70%", bar: "70%", color: "#ffa600" },
-  { icon: Atom, label: "React", value: "80%", bar: "80%", color: "#61dafb" },
-  { icon: Coffee, label: "Java", value: "60%", bar: "60%", color: "#f89820" },
-  { icon: Table2, label: "PostgreSQL", value: "65%", bar: "65%", color: "#58a6d6" },
+  { icon: FileCode2, label: "HTML5", level: "Avanzado", dots: 5, color: "#e44d26" },
+  { icon: Palette, label: "CSS3", level: "Avanzado", dots: 5, color: "#4d7cff" },
+  { icon: Wind, label: "Tailwind CSS", level: "Intermedio", dots: 3, color: "#38bdf8" },
+  { icon: Braces, label: "JavaScript", level: "Avanzado", dots: 5, color: "#f0db4f" },
+  { icon: FileTerminal, label: "Python", level: "Sólido", dots: 4, color: "#a678ff" },
+  { icon: Server, label: "PHP", level: "Sólido", dots: 4, color: "#8892be" },
+  { icon: Database, label: "MySQL", level: "Sólido", dots: 4, color: "#ffa600" },
+  { icon: Atom, label: "React", level: "Intermedio", dots: 3, color: "#61dafb" },
+  { icon: Coffee, label: "Java", level: "Sólido", dots: 4, color: "#f89820" },
+  { icon: Table2, label: "PostgreSQL", level: "Intermedio", dots: 3, color: "#58a6d6" },
 ];
 
 export default function TechSection() {
@@ -47,28 +48,29 @@ export default function TechSection() {
               </div>
               <ul className="mt-6 space-y-5 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:space-y-0 sm:gap-y-5">
                 {SKILLS.map((s) => (
-                  <li key={s.label}>
+                  <li key={s.label} aria-label={`Nivel de ${s.label}: ${s.level}`}>
                     <div className="flex items-center gap-3 text-sm">
                       <s.icon className="w-4 h-4 shrink-0" style={{ color: s.color }} aria-hidden="true" />
                       <span className="text-slate-200 font-medium">{s.label}</span>
-                      <span className="ml-auto font-semibold text-white font-display">{s.value}</span>
+                      <span
+                        className="ml-auto rounded-full border px-2 py-0.5 text-[11px] font-semibold whitespace-nowrap"
+                        style={{ color: s.color, borderColor: `${s.color}55`, backgroundColor: `${s.color}14` }}
+                      >
+                        {s.level}
+                      </span>
                     </div>
-                    <div
-                      className="mt-2 h-1.5 rounded-full bg-white/10 overflow-hidden"
-                      role="progressbar"
-                      aria-valuenow={parseInt(s.value, 10)}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`Nivel de ${s.label}: ${s.value}`}
-                    >
-                      <m.div
-                        initial={{ scaleX: 0 }}
-                        whileInView={{ scaleX: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                        style={{ width: s.bar, transformOrigin: "left center" }}
-                        className="h-full rounded-full bg-gradient-to-r from-sky-400 to-violet-500 shadow-[0_0_12px_rgba(56,189,248,0.7)] will-change-auto sm:will-change-transform"
-                      />
+                    <div className="mt-2 flex items-center gap-1.5" aria-hidden="true">
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <m.span
+                          key={i}
+                          initial={reduce ? false : { opacity: 0, scale: 0 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: i * 0.08 }}
+                          className={`w-1.5 h-1.5 rounded-full${i < s.dots ? "" : " bg-white/10"}`}
+                          style={i < s.dots ? { backgroundColor: s.color } : undefined}
+                        />
+                      ))}
                     </div>
                   </li>
                 ))}
@@ -80,7 +82,7 @@ export default function TechSection() {
             <p className="font-display font-bold text-white">Frontend + Backend</p>
             <p className="text-xs text-slate-400">cobertura completa</p>
           </m.div>
-          <m.div style={{ y: canParallax ? yFloat : 0 }} aria-hidden="true" className="absolute -bottom-6 -left-3 sm:-left-6 glass rounded-2xl px-4 py-3 text-sm animate-float-slow hidden sm:block">
+          <m.div style={{ y: canParallax ? yFloat : 0 }} aria-hidden="true" className="absolute -bottom-8 xl:-left-8 glass rounded-2xl px-4 py-3 text-sm animate-float-slow hidden xl:block pointer-events-none">
             <p className="font-display font-bold text-white">Siempre aprendiendo</p>
             <p className="text-xs text-slate-400">nuevos desafíos</p>
           </m.div>
@@ -100,7 +102,7 @@ export default function TechSection() {
           </Reveal>
           <ul className="mt-8 space-y-4">
             {[
-              ["Frontend", "HTML5, CSS3, JavaScript y React: interfaces limpias, rápidas, accesibles y responsivas."],
+              ["Frontend", "HTML5, CSS3, Tailwind CSS, JavaScript y React: interfaces limpias, rápidas, accesibles y responsivas."],
               ["Backend", "Python, PHP y Java con MySQL y PostgreSQL: lógica de negocio, APIs y persistencia sólida."],
               ["Flujo completo", "Diseño, desarrollo, despliegue y contacto directo durante todo el proyecto."],
             ].map(([t, d], i) => (

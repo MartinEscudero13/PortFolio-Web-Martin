@@ -87,7 +87,7 @@ export default function Hero() {
                 alt="Foto de Martín Escudero"
                 className="relative w-full h-full object-cover object-[50%_12%] rounded-full border-4 border-[#030712]"
                 loading="eager"
-                fetchpriority="high"
+                fetchPriority="high"
                 decoding="async"
               />
             </picture>
